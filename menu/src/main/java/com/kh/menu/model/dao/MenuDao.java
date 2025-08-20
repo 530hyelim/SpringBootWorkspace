@@ -1,38 +1,38 @@
-package com.kh.menu.model.service;
+package com.kh.menu.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
 
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Repository;
 
-import com.kh.menu.model.dao.MenuDao;
 import com.kh.menu.model.dto.MenuDto.MenuPost;
 import com.kh.menu.model.dto.MenuDto.MenuPut;
 import com.kh.menu.model.dto.MenuDto.MenuResponse;
 
-@Service
-public class MenuService {
+@Repository
+public class MenuDao {
 	@Autowired
-	private MenuDao dao;
-	
+	private SqlSessionTemplate session;
+
 	public List<MenuResponse> selectMenus(HashMap<String, Object> param) {
-		return dao.selectMenus(param);
+		return session.selectList("menumapper.selectMenus", param);
 	}
 
 	public int insertMenu(MenuPost menu) {
-		return dao.insertMenu(menu);
+		return session.insert("menumapper.insertMenu", menu);
 	}
 
 	public MenuResponse selectMenu(long id) {
-		return dao.selectMenu(id);
+		return session.selectOne("menumapper.selectMenu", id);
 	}
 
 	public int updateMenu(MenuPut menu) {
-		return dao.updateMenu(menu);
+		return session.update("menumapper.updateMenu", menu);
 	}
 
 	public int deleteMenu(long id) {
-		return dao.deleteMenu(id);
+		return session.delete("menumapper.deleteMenu", id);
 	}
 }
