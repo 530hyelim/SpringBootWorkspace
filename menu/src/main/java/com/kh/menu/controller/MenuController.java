@@ -84,7 +84,7 @@ public class MenuController {
 					array=@ArraySchema(schema=@Schema(implementation=MenuResponse.class))
 					)
 			)
-	@CrossOrigin(origins="http://localhost:5173")
+	//@CrossOrigin(origins="http://localhost:5173")
 	public ResponseEntity<List<MenuResponse>> menus(
 			@Parameter(description="검색 필터 (type, taste)")
 			@RequestParam HashMap<String, Object> param // 검색파라미터값
@@ -102,6 +102,7 @@ public class MenuController {
 		@ApiResponse(responseCode="201", description="메뉴 생성 성공"),
 		@ApiResponse(responseCode="400", description="메뉴 생성 실패")
 	})
+	//@CrossOrigin(origins="http://localhost:5173", exposedHeaders = "Location")
 	public ResponseEntity<Void> insertMenu(
 			// 리퀘스트 파람이 dto 일 경우 스키마 상세하게 작성되어있어서 parameter 안써도 됨
 			@RequestBody MenuPost menu // 일반 url 인코딩 방식으로 넘어온 경우에만 자동바인딩 => requestBody 필요
@@ -131,6 +132,7 @@ public class MenuController {
 				content=@Content(schema=@Schema(implementation=MenuResponse.class))),
 		@ApiResponse(responseCode="404", description="메뉴 없음")
 	})
+	//@CrossOrigin(origins="http://localhost:5173")
 	public ResponseEntity<MenuResponse> menu(
 			@Parameter(description="조회할 메뉴의 ID", required=true, example="1")
 			@PathVariable long id

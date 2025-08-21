@@ -132,3 +132,4 @@ buildNumber.properties
 demo
 
 # End of https://www.toptal.com/developers/gitignore/api/test,maven,java
+/.metadata/
